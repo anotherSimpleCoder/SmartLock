@@ -18,6 +18,10 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
-      - name: Build PlatformIO Project
+      - name: Test
         working-directory: KeypadModule
         run: pio test -e native
+
+      - name: Build
+        working-directory: KeypadModuĺe
+        run: pio run -e nano_every
