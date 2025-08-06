@@ -23,5 +23,5 @@ jobs:
         run: pio test -e native
 
       - name: Build
-        working-directory: KeypadModuĺe
+        working-directory: KeypadModule
         run: pio run -e nano_every
