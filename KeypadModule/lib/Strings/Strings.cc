@@ -1,7 +1,7 @@
 //
 // Created by amsakan on 06.08.25.
 //
-#include "String.hh"
+#include "Strings.hh"
 
 bool Strings::equals(const char* string1, const char* string2) {
     for(int i = 0; i < 4; i++) {

@@ -4,6 +4,12 @@
 #include <Arduino.h>
 #include "Leds.hh"
 
+void LEDS::init() {
+    pinMode(RED_LED_PIN, OUTPUT);
+    pinMode(GREEN_LED_PIN, OUTPUT);
+}
+
+
 void LEDS::redBlink() {
     digitalWrite(RED_LED_PIN, HIGH);
     delay(2000);

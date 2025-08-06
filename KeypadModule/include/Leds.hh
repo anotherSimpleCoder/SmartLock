@@ -7,8 +7,8 @@
 #include "Device.hh"
 
 class LEDS : Device {
-    constexpr int RED_LED_PIN = 10;
-    constexpr int GREEN_LED_PIN = 11;
+    const int RED_LED_PIN = 10;
+    const int GREEN_LED_PIN = 11;
 
 public:
     void init() override;

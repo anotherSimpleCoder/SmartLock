@@ -1,9 +1,7 @@
 //
 // Created by amsakan on 06.08.25.
-//
 #include "Keys.hh"
-
-#include "String.hh"
+#include "../lib/Strings/Strings.hh"
 
 Keys::Keys() {
     keypad = new Keypad(

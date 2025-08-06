@@ -1,29 +1,29 @@
 //
 // Created by amsakan on 06.08.25.
 //
-
 #ifndef KEYPAD_HH
 #define KEYPAD_HH
+
 #include <Keypad.h>
 #include "AuthDevice.hh"
 #include "Leds.hh"
 
 class Keys : public AuthDevice {
-    constexpr unsigned int ROWS = 4;
-    constexpr unsigned int COLS = 3;
+    const static unsigned int ROWS = 4;
+    const static unsigned int COLS = 3;
 
-    constexpr char keys[ROWS][COLS] = {
+    const char keys[ROWS][COLS] = {
         {'1', '2', '3'},
         {'4', '5', '6'},
         {'7', '8', '9'},
         {'*', '0', '#'}
     };
 
-    constexpr byte rowPins[] = {2, 3, 4, 5};
-    constexpr byte colPins[] = {6, 7, 8};
+    byte rowPins[4] = {2, 3, 4, 5};
+    byte colPins[3] = {6, 7, 8};
 
-    char pinCode[4] = "1473";
-    char buffer[4];
+    char pinCode[5] = "1473";
+    char buffer[5];
     int i = 0;
 
     Keypad* keypad;
