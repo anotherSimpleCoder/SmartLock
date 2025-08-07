@@ -20,4 +20,4 @@ jobs:
 
       - name: Build 
         working-directory: RFIDModule
-        run: pio run -e nano_every
+        run: pio run -e uno
