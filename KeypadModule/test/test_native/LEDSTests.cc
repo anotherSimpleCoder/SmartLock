@@ -4,7 +4,7 @@
 #include <gtest/gtest.h>
 #include <ArduinoFake.h>
 #include "Leds.hh"
-#include "../../src/LEDS.cc"
+#include "../../src/Leds.cc"
 
 using namespace fakeit;
 
