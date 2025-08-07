@@ -2,7 +2,7 @@
 // Created by amsakan on 05.08.25.
 //
 #include <Arduino.h>
-#include "LEDS.hh"
+#include "Leds.hh"
 
 const int LEDS::RED_LED_PIN = 10;
 const int LEDS::GREEN_LED_PIN = 11;
