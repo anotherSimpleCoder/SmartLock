@@ -1,6 +1,3 @@
-//
-// Created by abav on 07.08.2025.
-//
 #include <gtest/gtest.h>
 #include <ArduinoFake.h>
 #include "LEDS.hh"

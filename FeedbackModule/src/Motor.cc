@@ -22,3 +22,7 @@ void Motor::run() {
         delay(5);                       // waits 15ms for the servo to reach the position
     }
 }
+
+Servo Motor::getServo() {
+    return myservo;
+}
