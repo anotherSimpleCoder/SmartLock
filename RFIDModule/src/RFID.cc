@@ -5,11 +5,13 @@
 #include "RFID.hh"
 
 RFID::RFID() :
-    sensor(SS_PIN, RST_PIN){}
+    sensor(SS_PIN, RST_PIN),
+    leds(LEDS()) {}
 
 void RFID::init() {
     SPI.begin();
     sensor.PCD_Init();
+    leds.init();
 }
 
 void RFID::authenticate() {
@@ -28,11 +30,11 @@ void RFID::authenticate() {
     if(status != MFRC522::STATUS_OK) {
         Serial.print(F("Authentication failed: "));
         Serial.println(sensor.GetStatusCodeName(status));
-        LEDS::redBlink();
+        leds.redBlink();
         return;
     }
 
-    LEDS::greenBlink();
+    leds.greenBlink();
     Serial.println("Works!");
 
 

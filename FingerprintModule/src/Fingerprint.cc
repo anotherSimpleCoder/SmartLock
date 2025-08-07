@@ -2,6 +2,7 @@
 // Created by amsakan on 06.08.25.
 //
 #include "Fingerprint.hh"
+#include "Leds.hh"
 
 Fingerprint::Fingerprint():
     mySerial(SoftwareSerial(2, 3)), finger(Adafruit_Fingerprint(&mySerial)){}

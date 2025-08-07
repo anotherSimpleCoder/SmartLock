@@ -4,9 +4,11 @@
 
 #ifndef AUTHDEVICE_HH
 #define AUTHDEVICE_HH
-class AuthDevice {
+
+#include "Device.hh"
+
+class AuthDevice : public Device {
 public:
-    virtual void init() = 0;
     virtual void authenticate() = 0;
 };
 #endif //AUTHDEVICE_HH

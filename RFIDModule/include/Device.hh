@@ -1,5 +1,5 @@
 //
-// Created by amsakan on 06.08.25.
+// Created by abav on 07.08.2025.
 //
 
 #ifndef DEVICE_HH

@@ -7,10 +7,11 @@
 #include "AuthDevice.hh"
 #include <SPI.h>
 #include <MFRC522.h>
+#include "Leds.hh"
 
 class RFID : public AuthDevice {
-    constexpr unsigned int RST_PIN = 9;
-    constexpr unsigned int SS_PIN = 10;
+    constexpr static unsigned int RST_PIN = 9;
+    constexpr static unsigned int SS_PIN = 10;
 
     unsigned char block = 0;
     unsigned char length = 15;
@@ -19,6 +20,8 @@ class RFID : public AuthDevice {
     MFRC522 sensor;
     MFRC522::StatusCode status;
     MFRC522::MIFARE_Key key;
+
+    LEDS leds;
 public:
     RFID();
     void init() override;
