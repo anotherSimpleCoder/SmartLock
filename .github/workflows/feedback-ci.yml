@@ -18,6 +18,10 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio 
 
+      - name: Test
+        working-directory: FeedbackModule
+        run: pio test -e uno
+
       - name: Build
         working-directory: FeedbackModule
         run: pio run -e uno

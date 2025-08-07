@@ -7,10 +7,10 @@
 #include "Device.hh"
 
 class LEDS : Device {
-    const int RED_LED_PIN = 10;
-    const int GREEN_LED_PIN = 11;
-
 public:
+    static const int RED_LED_PIN;
+    static const int GREEN_LED_PIN;
+
     void init() override;
     void redBlink();
     void greenBlink();

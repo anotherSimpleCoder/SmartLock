@@ -4,6 +4,9 @@
 #include <Arduino.h>
 #include "LEDS.hh"
 
+const int LEDS::RED_LED_PIN = 10;
+const int LEDS::GREEN_LED_PIN = 11;
+
 void LEDS::init() {
     pinMode(RED_LED_PIN, OUTPUT);
     pinMode(GREEN_LED_PIN, OUTPUT);
