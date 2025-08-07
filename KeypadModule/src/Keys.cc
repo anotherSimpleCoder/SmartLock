@@ -33,8 +33,12 @@ void Keys::authenticate() {
         i = 0;
         Strings::clear(buffer);
     } else if(i < 4) {
-        Serial.println(key);
+        //Serial.println(key);
         buffer[i] = key;
         i++;
     }
+}
+
+Keypad* Keys::getKeypad() {
+    return keypad;
 }
