@@ -3,7 +3,7 @@
 //
 #include <gtest/gtest.h>
 #include <ArduinoFake.h>
-#include "LEDS.hh"
+#include "Leds.hh"
 #include "../../src/LEDS.cc"
 
 using namespace fakeit;
