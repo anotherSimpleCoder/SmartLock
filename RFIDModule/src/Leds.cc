@@ -26,8 +26,3 @@ void LEDS::greenBlink() {
     digitalWrite(GREEN_LED_PIN, LOW);
     delay(2000);
 }
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
-}

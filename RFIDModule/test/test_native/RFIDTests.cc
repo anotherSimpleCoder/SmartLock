@@ -24,3 +24,8 @@ TEST_F(RFIDTests, CorrectRFIDChip_ShouldBlinkGreen) {
 
     rfid.authenticate();
 }
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
