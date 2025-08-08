@@ -4,6 +4,12 @@
 #include "Leds.hh"
 #include "RFID.hh"
 
+#ifdef UNIT_TEST
+    #include <ArduinoFake.h>
+#else
+    #include <SPI.h>
+#endif
+
 RFID::RFID() :
     sensor(SS_PIN, RST_PIN),
     leds(LEDS()) {}
@@ -27,17 +33,16 @@ void RFID::authenticate() {
 
 
     status = sensor.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 4, &key, &sensor.uid);
+
     if(status != MFRC522::STATUS_OK) {
-        Serial.print(F("Authentication failed: "));
-        Serial.println(sensor.GetStatusCodeName(status));
+        //Serial.print(F("Authentication failed: "));
+        //Serial.println(sensor.GetStatusCodeName(status));
         leds.redBlink();
         return;
     }
 
     leds.greenBlink();
-    Serial.println("Works!");
-
-
     sensor.PICC_HaltA();
     sensor.PCD_StopCrypto1();
+
 }

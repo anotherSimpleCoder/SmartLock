@@ -18,6 +18,10 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
+      - name: Test
+        working-directory: RFIDModule
+        run: pio test -e native
+
       - name: Build 
         working-directory: RFIDModule
         run: pio run -e uno

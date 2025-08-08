@@ -4,9 +4,13 @@
 
 #ifndef RFID_HH
 #define RFID_HH
+#ifdef UNIT_TEST
+#include "../test/test_native/mocks/MFRC522.hh"
+#else
+    #include <MFRC522.h>
+#endif
+
 #include "AuthDevice.hh"
-#include <SPI.h>
-#include <MFRC522.h>
 #include "Leds.hh"
 
 class RFID : public AuthDevice {
