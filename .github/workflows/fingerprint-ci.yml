@@ -18,6 +18,10 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
 
+      - name: Test
+        working-directory: FingerprintModule
+        run: pio run -e native
+
       - name: Build
         working-directory: FingerprintModule
         run: pio run -e uno

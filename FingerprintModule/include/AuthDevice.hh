@@ -2,11 +2,13 @@
 // Created by amsakan on 06.08.25.
 //
 
-#ifndef DEVICE_HH
-#define DEVICE_HH
-class AuthDevice {
+#ifndef AUTHDEVICE_HH
+#define AUTHDEVICE_HH
+
+#include "Device.hh"
+
+class AuthDevice : Device{
 public:
-    virtual void init() = 0;
     virtual void authenticate() = 0;
 };
-#endif //DEVICE_HH
+#endif //AUTHDEVICE_HH
