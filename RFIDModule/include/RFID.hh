@@ -30,5 +30,6 @@ public:
     RFID();
     void init() override;
     void authenticate() override;
+    MFRC522* getSensor();
 };
 #endif //RFID_HH

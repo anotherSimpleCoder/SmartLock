@@ -7,11 +7,13 @@
 class MFRC522 {
     bool newCardPresent = true;
     bool readCardSerial = true;
+    unsigned char readCardData[7];
 public:
     int uid;
     const static int PICC_CMD_MF_AUTH_KEY_A = -1;
     enum StatusCode {
         STATUS_OK = 0,
+        STATUS_ERROR = -1,
     };
     struct MIFARE_Key {
         unsigned char keyByte[7];
@@ -23,8 +25,20 @@ public:
     void PCD_StopCrypto1() {}
     bool PICC_IsNewCardPresent() { return newCardPresent; }
     bool PICC_ReadCardSerial() { return readCardSerial; }
+    void readCard(unsigned char card[7]) {
+        for (int i = 0; i < 7; i++) {
+            readCardData[i] = card[i];
+        }
+    }
 
-    StatusCode PCD_Authenticate(int keytype, int size, MIFARE_Key* key, int* uid) {
+
+    StatusCode PCD_Authenticate(int keytype, int blockAddress, MIFARE_Key* key, int* uid) {
+        for (int i = 0; i < 6; i++) {
+            if (key->keyByte[i] != readCardData[i]) {
+                return STATUS_ERROR;
+            }
+        }
+
         return STATUS_OK;
     }
 };

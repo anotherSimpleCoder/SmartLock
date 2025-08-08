@@ -46,3 +46,7 @@ void RFID::authenticate() {
     sensor.PCD_StopCrypto1();
 
 }
+
+MFRC522* RFID::getSensor() {
+    return &sensor;
+}
