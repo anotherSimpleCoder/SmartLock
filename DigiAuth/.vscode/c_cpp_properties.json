@@ -1,0 +1,46 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "/home/amsakan/dev/SmartLock/DigiAuth/include",
+                "/home/amsakan/dev/SmartLock/DigiAuth/src",
+                "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest",
+                "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest/googlemock",
+                "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest/googlemock/include",
+                "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest/googletest",
+                "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest/googletest/include",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "/home/amsakan/dev/SmartLock/DigiAuth/include",
+                    "/home/amsakan/dev/SmartLock/DigiAuth/src",
+                    "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest",
+                    "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest/googlemock",
+                    "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest/googlemock/include",
+                    "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest/googletest",
+                    "/home/amsakan/dev/SmartLock/DigiAuth/.pio/libdeps/native/googletest/googletest/include",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60118",
+                "UNIT_TEST",
+                ""
+            ],
+            "cppStandard": "c++14",
+            "compilerPath": "/usr/bin/gcc",
+            "compilerArgs": [
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}
