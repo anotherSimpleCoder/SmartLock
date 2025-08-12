@@ -32,10 +32,9 @@ TEST_F(FingerprintTests, AuthenticateRightImage_ShouldBeOkay) {
 
   fingerprint.authenticate();
 
-
-  Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::GREEN_LED_PIN, HIGH)).Once();
-  Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::GREEN_LED_PIN, LOW)).Once();
-  Verify(Method(ArduinoFake(), delay).Using(2000)).Exactly(2);
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::START})));
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::SUCCESS})));
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::END})));
 }
 
 TEST_F(FingerprintTests, AuthenticateWrongImage_ShouldError) {
@@ -50,10 +49,9 @@ TEST_F(FingerprintTests, AuthenticateWrongImage_ShouldError) {
 
   fingerprint.authenticate();
 
-
-  Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::RED_LED_PIN, HIGH)).Once();
-  Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::RED_LED_PIN, LOW)).Once();
-  Verify(Method(ArduinoFake(), delay).Using(2000)).Exactly(2);
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::START})));
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::FAIL})));
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::END})));
 }
 
 int main(int argc, char **argv) {

@@ -5,10 +5,12 @@
 #ifndef FINGERPRINT_HH
 #define FINGERPRINT_HH
 #ifdef UNIT_TEST
-    #include <ArduinoFake.h>
     #include "../test/test_native/mocks/FingerprintMock.hh"
+    #include "../test/test_native/mocks/WireMock.hh"
+    #define Wire WireMock
 #else
     #include <Adafruit_Fingerprint.h>
+    #include <Wire.h>
 #endif
 
 #include "Leds.hh"

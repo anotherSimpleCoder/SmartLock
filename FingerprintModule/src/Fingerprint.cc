@@ -3,6 +3,9 @@
 //
 #include "Fingerprint.hh"
 
+#include <Arduino.h>
+
+#include "../lib/DigiAuth/DigiAuth.hh"
 
 Fingerprint::Fingerprint():
     mySerial(SoftwareSerial(2, 3)), finger(Adafruit_Fingerprint(&mySerial)){}
@@ -11,24 +14,28 @@ Fingerprint::Fingerprint():
 void Fingerprint::init() {
     leds.init();
     finger.begin(57600);
-
-    if (finger.verifyPassword()) {
-        //Serial.println("Found fingerprint sensor!");
-    } else {
-        //Serial.println("Did not find fingerprint sensor :(");
-        while (1) {delay(1);}
-    }
 }
 
 void Fingerprint::authenticate() {
+    Wire.beginTransmission(DigiAuth::FINGERPRINT_CHANNEL);
+    Wire.write(DigiAuth::encode({0, DigiAuth::Status::START}));
+
     auto status = finger.getImage();
 
     if (status == FINGERPRINT_OK) {
-        //Serial.println("works!");
-        leds.greenBlink();
+        Wire.write(DigiAuth::encode({
+            0, DigiAuth::Status::SUCCESS
+        }));
+        //leds.greenBlink();
     } else {
-        leds.redBlink();
+        Wire.write(DigiAuth::encode({
+            0, DigiAuth::Status::FAIL
+        }));
+        //leds.redBlink();
     }
+
+    Wire.write(DigiAuth::encode({0, DigiAuth::Status::END}));
+    Wire.endTransmission();
 }
 
 Adafruit_Fingerprint* Fingerprint::getFingerprint() {
