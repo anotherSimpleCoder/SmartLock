@@ -19,7 +19,7 @@ namespace DigiAuth {
                 unsigned char deviceId;
                 Status status;
 
-                bool 
+                bool
                 operator==(const DigiAuthMessage &message) const {
                         return (this->deviceId == message.deviceId)
                         && (this->status == message.status);
@@ -32,10 +32,10 @@ namespace DigiAuth {
                 }
         };
 
-        unsigned char 
+        unsigned char
         encode(DigiAuthMessage message);
-        
-        DigiAuthMessage 
+
+        DigiAuthMessage
         decode(unsigned char code);
 }
 

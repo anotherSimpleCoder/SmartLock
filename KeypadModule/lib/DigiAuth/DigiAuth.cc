@@ -1,7 +1,5 @@
 #include "DigiAuth.hh"
 
-#include <iostream>
-
 unsigned char 
 DigiAuth::encode(DigiAuthMessage message) {
         unsigned char code = DIGIAUTH_PREAMBLE << 2;
