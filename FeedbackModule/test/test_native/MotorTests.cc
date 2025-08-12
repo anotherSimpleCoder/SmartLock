@@ -13,7 +13,7 @@ protected:
   }
 };
 
-TEST_F(MotorTests, Test1) {
+TEST_F(MotorTests, RunMotor_ShouldBeZero) {
   When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
   When(Method(ArduinoFake(), delay)).AlwaysReturn();
 
