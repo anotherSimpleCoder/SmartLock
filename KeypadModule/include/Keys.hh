@@ -14,7 +14,6 @@
 #endif
 
 #include "AuthDevice.hh"
-#include "Leds.hh"
 
 
 class Keys : public AuthDevice {
@@ -36,7 +35,6 @@ class Keys : public AuthDevice {
     int i = 0;
 
     Keypad* keypad;
-    LEDS leds;
 public:
     Keys();
     void init() override;

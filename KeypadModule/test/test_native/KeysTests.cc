@@ -38,10 +38,6 @@ TEST_F(KeysTests, EnterRightPin_ShouldBlinkGreen) {
   keys.getKeypad()->pressKey('#');
   keys.authenticate();
 
-  Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::GREEN_LED_PIN, HIGH)).Once();
-  Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::GREEN_LED_PIN, LOW)).Once();
-  Verify(Method(ArduinoFake(), delay).Using(2000)).Exactly(2);
-
   ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, Status::START})));
   ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, Status::SUCCESS})));
   ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, Status::END})));
@@ -69,10 +65,6 @@ TEST_F(KeysTests, EnterRightPin_ShouldBlinkRed) {
 
   keys.getKeypad()->pressKey('#');
   keys.authenticate();
-
-  Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::RED_LED_PIN, HIGH)).Once();
-  Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::RED_LED_PIN, LOW)).Once();
-  Verify(Method(ArduinoFake(), delay).Using(2000)).Exactly(2);
 
   ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, Status::START})));
   ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, Status::FAIL})));

@@ -18,7 +18,6 @@ Keys::Keys() {
 
 void Keys::init() {
     Wire.begin();
-    leds.init();
 }
 
 void Keys::authenticate() {
@@ -35,12 +34,10 @@ void Keys::authenticate() {
             Wire.write(DigiAuth::encode({
                 0, Status::SUCCESS
             }));
-            leds.greenBlink();
         } else {
             Wire.write(DigiAuth::encode({
                 0, Status::FAIL
             }));
-            leds.redBlink();
         }
 
         i = 0;
