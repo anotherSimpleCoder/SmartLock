@@ -6,12 +6,16 @@
 
 #ifdef UNIT_TEST
     #include "../test/test_native/mocks/KeypadMock.hh"
+    #include "../test/test_native/mocks/WireMock.hh"
+    #define Wire WireMock
 #else
+    #include <Wire.h>
     #include <Keypad.h>
 #endif
 
 #include "AuthDevice.hh"
 #include "Leds.hh"
+
 
 class Keys : public AuthDevice {
     const static unsigned int ROWS = 4;

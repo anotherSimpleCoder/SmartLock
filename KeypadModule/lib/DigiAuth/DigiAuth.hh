@@ -1,0 +1,1 @@
+/home/amsakan/dev/SmartLock/DigiAuth/include/DigiAuth.hh
