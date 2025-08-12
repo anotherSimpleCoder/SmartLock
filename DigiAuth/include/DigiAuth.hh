@@ -1,12 +1,16 @@
 #ifndef DIGIAUTH_HH
 #define DIGIAUTH_HH
 
+
 namespace DigiAuth {
         constexpr unsigned char DIGIAUTH_PREAMBLE = 0b1010;
 
         constexpr unsigned char PREAMBLE_MASK = 0b11110000;
         constexpr unsigned char ID_MASK = 0b00001100;
         constexpr unsigned char STATUS_MASK = 0b00000011;
+
+        constexpr unsigned char KEYPAD_CHANNEL = 9;
+        constexpr unsigned char FINGERPRINT_CHANNEL = 10;
 
         enum Status {
                 START = 0,
