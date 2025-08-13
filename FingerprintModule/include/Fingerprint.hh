@@ -13,11 +13,9 @@
     #include <Wire.h>
 #endif
 
-#include "Leds.hh"
 #include "AuthDevice.hh"
 
 class Fingerprint : public AuthDevice {
-    LEDS leds;
     SoftwareSerial mySerial;
     Adafruit_Fingerprint finger;
     unsigned char id;

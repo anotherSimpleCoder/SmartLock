@@ -12,7 +12,6 @@ Fingerprint::Fingerprint():
 
 
 void Fingerprint::init() {
-    leds.init();
     finger.begin(57600);
 }
 
@@ -26,12 +25,10 @@ void Fingerprint::authenticate() {
         Wire.write(DigiAuth::encode({
             0, DigiAuth::Status::SUCCESS
         }));
-        //leds.greenBlink();
     } else {
         Wire.write(DigiAuth::encode({
             0, DigiAuth::Status::FAIL
         }));
-        //leds.redBlink();
     }
 
     Wire.write(DigiAuth::encode({0, DigiAuth::Status::END}));

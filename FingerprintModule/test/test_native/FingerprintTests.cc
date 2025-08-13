@@ -21,12 +21,8 @@ protected:
 };
 
 TEST_F(FingerprintTests, AuthenticateRightImage_ShouldBeOkay) {
-  When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
   Fingerprint fingerprint;
   fingerprint.init();
-
-  When(Method(ArduinoFake(), digitalWrite)).AlwaysReturn();
-  When(Method(ArduinoFake(), delay)).AlwaysReturn();
 
   fingerprint.getFingerprint()->setImage(rightImage);
 
@@ -38,12 +34,9 @@ TEST_F(FingerprintTests, AuthenticateRightImage_ShouldBeOkay) {
 }
 
 TEST_F(FingerprintTests, AuthenticateWrongImage_ShouldError) {
-  When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
   Fingerprint fingerprint;
   fingerprint.init();
 
-  When(Method(ArduinoFake(), digitalWrite)).AlwaysReturn();
-  When(Method(ArduinoFake(), delay)).AlwaysReturn();
 
   fingerprint.getFingerprint()->setImage(wrongImage);
 
