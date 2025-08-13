@@ -1,26 +1,25 @@
 //
 // Created by amsakan on 06.08.25.
 //
-#include "Leds.hh"
 #include "RFID.hh"
 
-#ifdef UNIT_TEST
-    #include <ArduinoFake.h>
-#else
-    #include <SPI.h>
-#endif
+#include <Arduino.h>
+
+#include "../lib/DigiAuth/DigiAuth.hh"
 
 RFID::RFID() :
-    sensor(SS_PIN, RST_PIN),
-    leds(LEDS()) {}
+    sensor(SS_PIN, RST_PIN) {}
 
 void RFID::init() {
     SPI.begin();
     sensor.PCD_Init();
-    leds.init();
+    Wire.begin();
 }
 
 void RFID::authenticate() {
+    Wire.beginTransmission(DigiAuth::RFID_CHANNEL);
+    Wire.write(DigiAuth::encode({0, DigiAuth::Status::START}));
+
     for(int i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
     
     if( ! sensor.PICC_IsNewCardPresent()) {
@@ -34,14 +33,22 @@ void RFID::authenticate() {
 
     status = sensor.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 4, &key, &sensor.uid);
 
+
     if(status != MFRC522::STATUS_OK) {
-        //Serial.print(F("Authentication failed: "));
-        //Serial.println(sensor.GetStatusCodeName(status));
-        leds.redBlink();
-        return;
+
+        Wire.write(DigiAuth::encode({
+            0, DigiAuth::Status::FAIL
+        }));
+    } else {
+        Wire.write(DigiAuth::encode({
+            0, DigiAuth::Status::SUCCESS
+        }));
     }
 
-    leds.greenBlink();
+
+    Wire.write(DigiAuth::encode({0, DigiAuth::Status::END}));
+    Wire.endTransmission();
+
     sensor.PICC_HaltA();
     sensor.PCD_StopCrypto1();
 

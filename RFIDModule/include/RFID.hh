@@ -5,13 +5,16 @@
 #ifndef RFID_HH
 #define RFID_HH
 #ifdef UNIT_TEST
-#include "../test/test_native/mocks/MFRC522.hh"
+    #include "../test/test_native/mocks/MFRC522.hh"
+    #include "../test/test_native/mocks/WireMock.hh"
+    #define Wire WireMock
 #else
     #include <MFRC522.h>
+    #include <SPI.h>
+    #include <Wire.h>
 #endif
 
 #include "AuthDevice.hh"
-#include "Leds.hh"
 
 class RFID : public AuthDevice {
     constexpr static unsigned int RST_PIN = 9;
@@ -24,8 +27,6 @@ class RFID : public AuthDevice {
     MFRC522 sensor;
     MFRC522::StatusCode status;
     MFRC522::MIFARE_Key key;
-
-    LEDS leds;
 public:
     RFID();
     void init() override;

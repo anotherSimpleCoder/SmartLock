@@ -2,8 +2,9 @@
 // Created by abav on 07.08.2025.
 //
 #include <gtest/gtest.h>
+#include <ArduinoFake.h>
 #include "RFID.hh"
-#include "../src/RFID.cc"
+#include "../../src/RFID.cc"
 
 using namespace fakeit;
 
@@ -19,10 +20,7 @@ public:
     }
 };
 
-TEST_F(RFIDTests, CorrectRFIDChip_ShouldBlinkGreen) {
-    When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
-    When(Method(ArduinoFake(), digitalWrite)).AlwaysReturn();
-    When(Method(ArduinoFake(), delay)).AlwaysReturn();
+TEST_F(RFIDTests, CorrectRFIDChip_ShouldBeSuccessful) {
     When(Method(ArduinoFake(SPI), begin)).AlwaysReturn();
     RFID rfid;
     rfid.init();
@@ -30,15 +28,12 @@ TEST_F(RFIDTests, CorrectRFIDChip_ShouldBlinkGreen) {
     rfid.getSensor()->readCard(rightCard);
     rfid.authenticate();
 
-    Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::GREEN_LED_PIN, HIGH)).Once();
-    Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::GREEN_LED_PIN, LOW)).Once();
-    Verify(Method(ArduinoFake(), delay).Using(2000)).Exactly(2);
+    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::START})));
+    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::SUCCESS})));
+    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::END})));
 }
 
-TEST_F(RFIDTests, WrongRFIDChip_ShouldBlinkRed) {
-    When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
-    When(Method(ArduinoFake(), digitalWrite)).AlwaysReturn();
-    When(Method(ArduinoFake(), delay)).AlwaysReturn();
+TEST_F(RFIDTests, WrongRFIDChip_ShouldError) {
     When(Method(ArduinoFake(SPI), begin)).AlwaysReturn();
     RFID rfid;
     rfid.init();
@@ -46,9 +41,9 @@ TEST_F(RFIDTests, WrongRFIDChip_ShouldBlinkRed) {
     rfid.getSensor()->readCard(wrongCard);
     rfid.authenticate();
 
-    Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::RED_LED_PIN, HIGH)).Once();
-    Verify(Method(ArduinoFake(), digitalWrite).Using(LEDS::RED_LED_PIN, LOW)).Once();
-    Verify(Method(ArduinoFake(), delay).Using(2000)).Exactly(2);
+    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::START})));
+    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::FAIL})));
+    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::END})));
 }
 
 int main(int argc, char **argv) {
