@@ -38,7 +38,7 @@ TEST_F(KeysTests, EnterRightPin_ShouldBlinkGreen) {
   keys.getKeypad()->pressKey('#');
   keys.authenticate();
 
-  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, Status::SUCCESS})));
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({Status::SUCCESS})));
 }
 
 TEST_F(KeysTests, EnterRightPin_ShouldBlinkRed) {
@@ -64,5 +64,5 @@ TEST_F(KeysTests, EnterRightPin_ShouldBlinkRed) {
   keys.getKeypad()->pressKey('#');
   keys.authenticate();
 
-  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, Status::FAIL})));
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({Status::FAIL})));
 }

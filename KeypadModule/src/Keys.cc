@@ -31,11 +31,11 @@ void Keys::authenticate() {
 
         if(equal) {
             Wire.write(DigiAuth::encode({
-                0, Status::SUCCESS
+                Status::SUCCESS
             }));
         } else {
             Wire.write(DigiAuth::encode({
-                0, Status::FAIL
+                Status::FAIL
             }));
         }
 
