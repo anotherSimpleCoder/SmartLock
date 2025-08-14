@@ -24,4 +24,4 @@ jobs:
 
       - name: Build 
         working-directory: RFIDModule
-        run: pio run -e uno
+        run: pio run -e nanoatmega328new
