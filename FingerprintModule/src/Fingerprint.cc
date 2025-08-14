@@ -13,6 +13,11 @@ Fingerprint::Fingerprint():
 
 void Fingerprint::init() {
     finger.begin(57600);
+    if (finger.verifyPassword()) {
+        Serial.println("Sensor found!");
+    } else {
+        Serial.println("Not found!");
+    }
 }
 
 void Fingerprint::authenticate() {

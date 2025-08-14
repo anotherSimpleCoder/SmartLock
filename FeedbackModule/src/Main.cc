@@ -4,48 +4,46 @@
 #include "LEDS.hh"
 #include "../lib/DigiAuth/DigiAuth.hh"
 
-Motor motor;
+//Motor motor;
 LEDS leds;
 
 using DigiAuth::Status;
 
+void receive(int bytes) {
+  unsigned char receivedCode = Wire.read();
+  DigiAuth::DigiAuthMessage message = DigiAuth::decode(receivedCode);
+
+  switch (message.status) {
+    case Status::START: {
+      break;
+    }
+
+    case Status::SUCCESS: {
+      //motor.run();
+      leds.greenBlink();
+
+      break;
+    }
+
+    case Status::FAIL: {
+      leds.redBlink();
+      break;
+    }
+
+    case Status::END: {
+      break;
+    }
+  }
+}
+
 void setup() {
-  Wire.begin();
+  Wire.begin(DigiAuth::DIGIAUTH_CHANNEL);
+  Wire.onReceive(receive);
   Serial.begin(9600);
-  motor.init();
+  //motor.init();
   leds.init();
 }
 
 void loop() {
-  Wire.requestFrom(0, 9);
-
-  while (Wire.available()) {
-    unsigned char receivedCode = Wire.read();
-    DigiAuth::DigiAuthMessage message = DigiAuth::decode(receivedCode);
-
-    switch (message.status) {
-      case Status::START: {
-        break;
-      }
-
-      case Status::SUCCESS: {
-        motor.run();
-        leds.greenBlink();
-
-        break;
-      }
-
-      case Status::FAIL: {
-        leds.redBlink();
-        break;
-      }
-
-      case Status::END: {
-        break;
-      }
-    }
-
-
-  }
-
+  delay(1000);
 }
