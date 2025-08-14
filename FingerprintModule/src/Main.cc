@@ -1,10 +1,15 @@
 #include <Arduino.h>
 
+#include "Fingerprint.hh"
+
+Fingerprint fingerprint;
+
 void setup() {
     Serial.begin(9600);
     while (!Serial);
-    delay(100);
+    fingerprint.init();
 }
 
 void loop() {
+    fingerprint.authenticate();
 }
