@@ -17,7 +17,7 @@ void Fingerprint::init() {
 }
 
 void Fingerprint::authenticate() {
-    Wire.beginTransmission(9);
+    Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
 
     auto status = finger.getImage();
 
