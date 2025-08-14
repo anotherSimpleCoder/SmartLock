@@ -21,8 +21,7 @@ void Keys::init() {
 }
 
 void Keys::authenticate() {
-    Wire.beginTransmission(DigiAuth::KEYPAD_CHANNEL);
-    Wire.write(DigiAuth::encode({0, Status::START}));
+    Wire.beginTransmission(9);
 
     char key = keypad->getKey();
     if(!key) return;
@@ -48,7 +47,6 @@ void Keys::authenticate() {
         i++;
     }
 
-    Wire.write(DigiAuth::encode({0, Status::END}));
     Wire.endTransmission();
 }
 
