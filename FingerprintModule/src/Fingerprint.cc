@@ -23,13 +23,13 @@ void Fingerprint::authenticate() {
 
     if (status == FINGERPRINT_OK) {
         Wire.write(DigiAuth::encode({
-            0, DigiAuth::Status::SUCCESS
+            DigiAuth::Status::SUCCESS
         }));
     }
 
     if (status == FINGERPRINT_IMAGEFAIL) {
         Wire.write(DigiAuth::encode({
-            0, DigiAuth::Status::FAIL
+            DigiAuth::Status::FAIL
         }));
     }
 

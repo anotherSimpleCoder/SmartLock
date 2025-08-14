@@ -29,7 +29,7 @@ TEST_F(FingerprintTests, AuthenticateRightImage_ShouldBeOkay) {
 
   fingerprint.authenticate();
 
-  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::SUCCESS})));
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({DigiAuth::Status::SUCCESS})));
 }
 
 TEST_F(FingerprintTests, AuthenticateWrongImage_ShouldError) {
@@ -41,7 +41,7 @@ TEST_F(FingerprintTests, AuthenticateWrongImage_ShouldError) {
 
   fingerprint.authenticate();
 
-  ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::FAIL})));
+  ASSERT_TRUE(Wire.contains(DigiAuth::encode({DigiAuth::Status::FAIL})));
 }
 
 int main(int argc, char **argv) {

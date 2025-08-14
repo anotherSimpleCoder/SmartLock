@@ -5,7 +5,6 @@
 Fingerprint fingerprint;
 
 void setup() {
-    Serial.begin(9600);
     while (!Serial);
     fingerprint.init();
 }
