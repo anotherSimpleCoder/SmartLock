@@ -12,10 +12,8 @@ namespace DigiAuth {
         constexpr unsigned char DIGIAUTH_CHANNEL = 9;
 
         enum Status {
-                START = 0,
                 SUCCESS = 1,
                 FAIL = 2,
-                END = 3
         };
 
         struct DigiAuthMessage {

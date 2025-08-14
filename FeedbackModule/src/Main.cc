@@ -11,33 +11,26 @@ using DigiAuth::Status;
 
 void receive(int bytes) {
   unsigned char receivedCode = Wire.read();
-  DigiAuth::DigiAuthMessage message = DigiAuth::decode(receivedCode);
 
-  switch (message.status) {
-    case Status::START: {
-      break;
-    }
-
-    case Status::SUCCESS: {
+  switch (receivedCode) {
+    case 161: {
       //motor.run();
+      Serial.println("works!");
       leds.greenBlink();
-
       break;
     }
 
-    case Status::FAIL: {
+    case 162: {
       leds.redBlink();
       break;
     }
 
-    case Status::END: {
-      break;
-    }
+    default: {}
   }
 }
 
 void setup() {
-  Wire.begin(DigiAuth::DIGIAUTH_CHANNEL);
+  Wire.begin(9);
   Wire.onReceive(receive);
   Serial.begin(9600);
   //motor.init();
