@@ -17,7 +17,7 @@ void RFID::init() {
 }
 
 void RFID::authenticate() {
-    Wire.beginTransmission(9);
+    Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
 
     for(int i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
     
