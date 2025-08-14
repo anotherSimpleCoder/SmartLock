@@ -28,9 +28,7 @@ TEST_F(RFIDTests, CorrectRFIDChip_ShouldBeSuccessful) {
     rfid.getSensor()->readCard(rightCard);
     rfid.authenticate();
 
-    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::START})));
     ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::SUCCESS})));
-    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::END})));
 }
 
 TEST_F(RFIDTests, WrongRFIDChip_ShouldError) {
@@ -41,9 +39,7 @@ TEST_F(RFIDTests, WrongRFIDChip_ShouldError) {
     rfid.getSensor()->readCard(wrongCard);
     rfid.authenticate();
 
-    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::START})));
     ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::FAIL})));
-    ASSERT_TRUE(Wire.contains(DigiAuth::encode({0, DigiAuth::Status::END})));
 }
 
 int main(int argc, char **argv) {
