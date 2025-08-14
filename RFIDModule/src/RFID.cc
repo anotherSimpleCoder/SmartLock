@@ -33,12 +33,12 @@ void RFID::authenticate() {
     status = sensor.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 4, &key, &sensor.uid);
     if(status != MFRC522::STATUS_OK) {
         Wire.write(DigiAuth::encode({
-            0, DigiAuth::Status::FAIL
+            DigiAuth::Status::FAIL
         }));
     } else {
 
         Wire.write(DigiAuth::encode({
-            0, DigiAuth::Status::SUCCESS
+            DigiAuth::Status::SUCCESS
         }));
 
     }
