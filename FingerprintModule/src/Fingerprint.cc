@@ -12,17 +12,12 @@ Fingerprint::Fingerprint():
 
 
 void Fingerprint::init() {
+    Wire.begin();
     finger.begin(57600);
-    if (finger.verifyPassword()) {
-        Serial.println("Sensor found!");
-    } else {
-        Serial.println("Not found!");
-    }
 }
 
 void Fingerprint::authenticate() {
-    Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
-    Wire.write(DigiAuth::encode({0, DigiAuth::Status::START}));
+    Wire.beginTransmission(9);
 
     auto status = finger.getImage();
 
@@ -30,13 +25,14 @@ void Fingerprint::authenticate() {
         Wire.write(DigiAuth::encode({
             0, DigiAuth::Status::SUCCESS
         }));
-    } else {
+    }
+
+    if (status == FINGERPRINT_IMAGEFAIL) {
         Wire.write(DigiAuth::encode({
             0, DigiAuth::Status::FAIL
         }));
     }
 
-    Wire.write(DigiAuth::encode({0, DigiAuth::Status::END}));
     Wire.endTransmission();
 }
 

@@ -7,7 +7,7 @@
 
 enum Status {
   FINGERPRINT_OK,
-  FINGERPRINT_ERROR
+  FINGERPRINT_IMAGEFAIL
 };
 
 class SoftwareSerial {
@@ -40,7 +40,7 @@ public:
   Status getImage() {
     for (int i = 0; i < 255; i++) {
       if (reference[i] != image[i]) {
-        return FINGERPRINT_ERROR;
+        return FINGERPRINT_IMAGEFAIL;
       }
     }
 
