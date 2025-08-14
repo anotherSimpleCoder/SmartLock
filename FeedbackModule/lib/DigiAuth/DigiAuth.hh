@@ -14,22 +14,20 @@ namespace DigiAuth {
         enum Status {
                 SUCCESS = 1,
                 FAIL = 2,
+                INVALID = 3
         };
 
         struct DigiAuthMessage {
-                unsigned char deviceId;
                 Status status;
 
                 bool
                 operator==(const DigiAuthMessage &message) const {
-                        return (this->deviceId == message.deviceId)
-                        && (this->status == message.status);
+                        return this->status == message.status;
                 }
 
                 bool
                 operator!=(const DigiAuthMessage &message) const {
-                        return !(this->deviceId != message.deviceId)
-                        && (this->status != message.status);
+                        return this->status != message.status;
                 }
         };
 
