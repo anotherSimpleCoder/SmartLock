@@ -17,7 +17,6 @@ Keys::Keys() {
 }
 
 void Keys::init() {
-    Serial.begin(9600);
     Wire.begin();
 }
 
@@ -44,7 +43,6 @@ void Keys::authenticate() {
         i = 0;
         Strings::clear(buffer);
     } else if(i < 4) {
-        Serial.println(key);
         buffer[i] = key;
         i++;
     }

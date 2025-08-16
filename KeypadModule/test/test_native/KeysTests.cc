@@ -15,7 +15,7 @@ public:
   }
 };
 
-TEST_F(KeysTests, EnterRightPin_ShouldBlinkGreen) {
+TEST_F(KeysTests, EnterRightPin_ShouldBeSuccessful) {
   When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
   Keys keys;
   keys.init();
@@ -39,6 +39,7 @@ TEST_F(KeysTests, EnterRightPin_ShouldBlinkGreen) {
   keys.authenticate();
 
   ASSERT_TRUE(Wire.contains(DigiAuth::encode({Status::SUCCESS})));
+
 }
 
 TEST_F(KeysTests, EnterRightPin_ShouldBlinkRed) {
