@@ -17,6 +17,7 @@ Keys::Keys() {
 }
 
 void Keys::init() {
+    Serial.begin(9600);
     Wire.begin();
 }
 
@@ -24,6 +25,7 @@ void Keys::authenticate() {
     Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
 
     char key = keypad->getKey();
+
     if(!key) return;
 
     if(key == '#') {
@@ -42,7 +44,7 @@ void Keys::authenticate() {
         i = 0;
         Strings::clear(buffer);
     } else if(i < 4) {
-        //Serial.println(key);
+        Serial.println(key);
         buffer[i] = key;
         i++;
     }

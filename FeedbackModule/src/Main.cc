@@ -4,7 +4,7 @@
 #include "LEDS.hh"
 #include "../lib/DigiAuth/DigiAuth.hh"
 
-//Motor motor;
+Motor motor;
 LEDS leds;
 
 using DigiAuth::Status;
@@ -12,12 +12,14 @@ using DigiAuth::Status;
 void receive(int bytes) {
   unsigned char receivedCode = Wire.read();
   DigiAuth::DigiAuthMessage message = DigiAuth::decode(receivedCode);
+  Serial.println(receivedCode);
 
   switch (message.status) {
     case Status::SUCCESS: {
-      //motor.run();
-      Serial.println("works!");
+      motor.open();
+      //Serial.println("works!");
       leds.greenBlink();
+
       break;
     }
 
@@ -31,13 +33,19 @@ void receive(int bytes) {
 }
 
 void setup() {
+  motor.init();
+  leds.init();
+
   Wire.begin(DigiAuth::DIGIAUTH_CHANNEL);
   Wire.onReceive(receive);
   Serial.begin(9600);
-  //motor.init();
-  leds.init();
+
 }
 
 void loop() {
-  delay(1000);
+  delay(5000);
+
+  if (motor.isOpen()) {
+    motor.close();
+  }
 }

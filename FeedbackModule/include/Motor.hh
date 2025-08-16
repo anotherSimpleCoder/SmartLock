@@ -16,9 +16,12 @@
 class Motor : public Device {
     Servo myservo;
     int pos;
+    bool opened = false;
 public:
     void init() override;
-    void run();
+    void open();
+    void close();
     Servo getServo();
+    bool isOpen();
 };
 #endif //MOTOR_HH

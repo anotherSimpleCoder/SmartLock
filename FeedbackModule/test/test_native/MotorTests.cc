@@ -13,7 +13,7 @@ protected:
   }
 };
 
-TEST_F(MotorTests, RunMotor_ShouldBeZero) {
+TEST_F(MotorTests, RunMotor_ShouldBeOpened) {
   When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
   When(Method(ArduinoFake(), delay)).AlwaysReturn();
 
@@ -21,13 +21,32 @@ TEST_F(MotorTests, RunMotor_ShouldBeZero) {
   motor.init();
 
 
-  ASSERT_EQ(motor.getServo().getAttachedPin(), 9);
+  ASSERT_EQ(motor.getServo().getAttachedPin(), 8);
 
 
-  motor.run();
+  motor.open();
 
-
-  Verify(Method(ArduinoFake(), delay).Using(5)).Exactly(362);
-  Verify(Method(ArduinoFake(), delay).Using(100)).Once();
+  ASSERT_TRUE(motor.isOpen());
   ASSERT_EQ(motor.getServo().getCurrentPosition(), 0);
+}
+
+TEST_F(MotorTests, RunMotor_ShouldBeClosed) {
+  When(Method(ArduinoFake(), pinMode)).AlwaysReturn();
+  When(Method(ArduinoFake(), delay)).AlwaysReturn();
+
+  Motor motor;
+  motor.init();
+
+
+  ASSERT_EQ(motor.getServo().getAttachedPin(), 8);
+
+
+  motor.open();
+
+  ASSERT_TRUE(motor.isOpen());
+  ASSERT_EQ(motor.getServo().getCurrentPosition(), 0);
+
+  motor.close();
+  ASSERT_FALSE(motor.isOpen());
+  ASSERT_EQ(motor.getServo().getCurrentPosition(), 90);
 }
