@@ -17,8 +17,6 @@ void RFID::init() {
 }
 
 void RFID::authenticate() {
-    Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
-
     for(int i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
     
     if( ! sensor.PICC_IsNewCardPresent()) {
@@ -32,18 +30,18 @@ void RFID::authenticate() {
 
     status = sensor.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, 4, &key, &sensor.uid);
     if(status != MFRC522::STATUS_OK) {
+        Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
         Wire.write(DigiAuth::encode({
             DigiAuth::Status::FAIL
         }));
+        Wire.endTransmission();
     } else {
-
+        Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
         Wire.write(DigiAuth::encode({
             DigiAuth::Status::SUCCESS
         }));
-
+        Wire.endTransmission();
     }
-
-    Wire.endTransmission();
 
     sensor.PICC_HaltA();
     sensor.PCD_StopCrypto1();

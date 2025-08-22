@@ -5,15 +5,18 @@
 #define KEYPAD_HH
 
 #ifdef UNIT_TEST
+    #include "../test/test_native/mocks/MockDisplay.hh"
     #include "../test/test_native/mocks/KeypadMock.hh"
     #include "../test/test_native/mocks/WireMock.hh"
     #define Wire WireMock
 #else
     #include <Wire.h>
     #include <Keypad.h>
+    #include "Display.hh"
 #endif
 
 #include "AuthDevice.hh"
+#include "Display.hh"
 
 
 class Keys : public AuthDevice {
@@ -35,6 +38,7 @@ class Keys : public AuthDevice {
     int i = 0;
 
     Keypad* keypad;
+    Display* display;
 public:
     Keys();
     void init() override;

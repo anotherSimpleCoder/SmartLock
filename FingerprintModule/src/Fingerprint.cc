@@ -3,8 +3,6 @@
 //
 #include "Fingerprint.hh"
 
-#include <Arduino.h>
-
 #include "../lib/DigiAuth/DigiAuth.hh"
 
 Fingerprint::Fingerprint():
@@ -17,23 +15,23 @@ void Fingerprint::init() {
 }
 
 void Fingerprint::authenticate() {
-    Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
-
     auto status = finger.getImage();
 
     if (status == FINGERPRINT_OK) {
+        Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
         Wire.write(DigiAuth::encode({
             DigiAuth::Status::SUCCESS
         }));
+        Wire.endTransmission();
     }
 
     if (status == FINGERPRINT_IMAGEFAIL) {
+        Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
         Wire.write(DigiAuth::encode({
             DigiAuth::Status::FAIL
         }));
+        Wire.endTransmission();
     }
-
-    Wire.endTransmission();
 }
 
 Adafruit_Fingerprint* Fingerprint::getFingerprint() {

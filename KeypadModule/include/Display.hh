@@ -20,6 +20,7 @@ public:
     void init() override;
     void successMessage();
     void failMessage();
+    void displayPIN(int pinLength);
     LCDI2C_Latin* getDisplay();
 };
 #endif //DISPLAY_HH

@@ -1,5 +1,6 @@
 //
 // Created by amsakan on 06.08.25.
+
 #include "Keys.hh"
 #include "../lib/Strings/Strings.hh"
 #include "../lib/DigiAuth/DigiAuth.hh"
@@ -14,15 +15,16 @@ Keys::Keys() {
         ROWS,
         COLS
     );
+
+    display = new Display();
 }
 
 void Keys::init() {
     Wire.begin();
+    display->init();
 }
 
 void Keys::authenticate() {
-    Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
-
     char key = keypad->getKey();
 
     if(!key) return;
@@ -31,13 +33,19 @@ void Keys::authenticate() {
         bool equal = Strings::equals(pinCode, buffer);
 
         if(equal) {
+            Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
             Wire.write(DigiAuth::encode({
                 Status::SUCCESS
             }));
+            Wire.endTransmission();
+            display->successMessage();
         } else {
+            Wire.beginTransmission(DigiAuth::DIGIAUTH_CHANNEL);
             Wire.write(DigiAuth::encode({
                 Status::FAIL
             }));
+            Wire.endTransmission();
+            display->failMessage();
         }
 
         i = 0;
@@ -45,9 +53,8 @@ void Keys::authenticate() {
     } else if(i < 4) {
         buffer[i] = key;
         i++;
+        display->displayPIN(i);
     }
-
-    Wire.endTransmission();
 }
 
 Keypad* Keys::getKeypad() {

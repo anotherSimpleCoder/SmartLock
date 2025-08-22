@@ -7,5 +7,6 @@
 namespace Strings {
     bool equals(const char* string1, const char* string2);
     void clear(char* string);
+    int length(char* string);
 };
 #endif //STRING_HH
