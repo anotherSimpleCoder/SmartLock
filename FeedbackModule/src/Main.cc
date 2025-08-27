@@ -2,12 +2,10 @@
 #include <Wire.h>
 #include "Motor.hh"
 #include "LEDS.hh"
-#include "Display.hh"
 #include "../lib/DigiAuth/DigiAuth.hh"
 
 Motor motor;
 LEDS leds;
-Display display;
 
 using DigiAuth::Status;
 
@@ -20,13 +18,11 @@ void receive(int bytes) {
     case Status::SUCCESS: {
       motor.open();
       leds.greenBlink();
-      //display.successMessage();
       break;
     }
 
     case Status::FAIL: {
       leds.redBlink();
-      //display.failMessage();
       break;
     }
 
@@ -43,7 +39,6 @@ void setup() {
   Wire.onReceive(receive);
   Serial.begin(9600);
 
-  //display.init();
 }
 
 void loop() {
